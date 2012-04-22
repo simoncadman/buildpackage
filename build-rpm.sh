@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e
 if [[ $# -lt 2 ]]; then
-   echo "USAGE: ./build-deb.sh name gitrepo [commit]"
+   echo "USAGE: ./build-rpm.sh name gitrepo [commit]"
    exit
 fi
 
@@ -20,9 +20,4 @@ if [[ $commit != ""  ]]; then
 fi
 rm -rf /tmp/buildpackage/$name-$date/.git
 cd /tmp/buildpackage/
-tar cjf $name\_$date.orig.tar.bz2 $name-$date
-cd $name-$date
-mv packages/debian debian
-rm -rf packages
-debuild -S
-echo "Files in /tmp/buildpackage/ , run dput changes file"
+echo "Files in /tmp/buildpackage/"
