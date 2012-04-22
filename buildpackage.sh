@@ -17,4 +17,9 @@ if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
 rm -rf /tmp/$name-$date/.git
+cd /tmp/
+tar cjf $name\_$date.orig.tar.bz2 $name-$date
+cd $name-$date
 mv packages/debian debian
+rm -rf packages
+debuild -S
