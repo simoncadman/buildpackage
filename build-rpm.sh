@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e
 if [[ $# -lt 2 ]]; then
-   echo "USAGE: ./build-rpm.sh name gitrepo [commit]"
+   echo "USAGE: ./build-rpm.sh name gitrepo [commit] [arch]"
    exit
 fi
 
@@ -9,15 +9,30 @@ export name="$1"
 export gitrepo="$2"
 export commit="$3"
 export date="`date +%Y%m%d`"
+export arch="noarch"
 
-mkdir -p /tmp/buildpackage
+if [[ $5 != ""  ]]; then
+	arch=$5
+fi
+
 rm -rf /tmp/buildpackage/$name-$date
-mkdir -p /tmp/buildpackage/$name-$date
-cd /tmp/buildpackage/$name-$date
-git clone $gitrepo . 
+mkdir -p /tmp/buildpackage/$name-$date/root/rpmbuild
+cd /tmp/buildpackage/$name-$date/root/rpmbuild
+mkdir {BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
+cd SOURCES
+git clone $gitrepo $name-$date
+cd $name-$date 
 if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
-rm -rf /tmp/buildpackage/$name-$date/.git
-cd /tmp/buildpackage/
-echo "Files in /tmp/buildpackage/"
+mv packages/redhat/SPECS/$name.spec /tmp/buildpackage/$name-$date/root/rpmbuild/SPECS/
+rm -rf .git packages
+cd ..
+tar cjf $name-$date.tar.bz2 $name-$date
+rm -rf $name-$date
+rm -rf /root/rpmbuild
+mkdir -p /root/rpmbuild/SOURCES
+mv $name-$date.tar.bz2 /root/rpmbuild/SOURCES/
+cd ..
+rpmbuild -ba SPECS/cupscloudprint.spec --target $arch
+echo "Files in /root/rpmbuild/RPMS"
