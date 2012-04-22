@@ -22,5 +22,5 @@ else
 fi
 rm -rf /tmp/buildpackage/$name-$date/.git
 #cat packages/gentoo/$name.ebuild > $start/$name-$date.ebuild
-sed -i 's/ugly/dsd/g' /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild
+sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild
 echo "Ebuild created"
