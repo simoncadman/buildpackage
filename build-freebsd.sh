@@ -19,4 +19,6 @@ if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
 cd packages/freebsd
+export FORCE_PKG_REGISTER=1
 make package
+echo "Package in `pwd`/`ls *.tbz`"
