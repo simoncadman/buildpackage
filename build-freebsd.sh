@@ -21,8 +21,15 @@ else
         commit="`git log | head -n1 | cut -d' ' -f2`"
 fi
 commit="`echo $commit | cut -c1-7`"
+OLDPWD="`pwd`"
 
-tar czf /usr/ports/distfiles/$name-$date.tar.gz ./
+mkdir -p /tmp/build-package/
+cp -rp ./ /tmp/build-package/simoncadman-CUPS-Cloud-Print-$commit/
+
+cd /tmp/build-package/
+tar --exclude=.git czf /usr/ports/distfiles/$name-$date.tar.gz simoncadman-CUPS-Cloud-Print-$commit
+
+cd "$OLDPWD"
 cd packages/freebsd
 sed -i -r "s/^PORTVERSION=.*/PORTVERSION=    $date/" Makefile
 sed -i -r "s/^GH_COMMIT=.*/GH_COMMIT=    $commit/" Makefile
