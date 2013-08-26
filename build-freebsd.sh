@@ -18,6 +18,7 @@ cd $name-$date
 if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
+tar czf /usr/ports/distfiles/cupscloudprint-$date.tar.gz ./
 cd packages/freebsd
 export FORCE_PKG_REGISTER=1
 make package
