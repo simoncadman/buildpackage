@@ -27,7 +27,7 @@ mkdir -p /tmp/build-package/
 cp -rp ./ /tmp/build-package/simoncadman-CUPS-Cloud-Print-$commit/
 
 cd /tmp/build-package/
-tar --exclude=.git czf /usr/ports/distfiles/$name-$date.tar.gz simoncadman-CUPS-Cloud-Print-$commit
+tar czf /usr/ports/distfiles/$name-$date.tar.gz simoncadman-CUPS-Cloud-Print-$commit
 
 cd "$OLDPWD"
 cd packages/freebsd
