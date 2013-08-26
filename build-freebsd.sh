@@ -22,10 +22,18 @@ else
 fi
 commit="`echo $commit | cut -c1-7`"
 
-tar czf /usr/ports/distfiles/cupscloudprint-$date.tar.gz ./
+tar czf /usr/ports/distfiles/$name-$date.tar.gz ./
 cd packages/freebsd
 sed -i -r "s/^PORTVERSION=.*/PORTVERSION=    $date/" Makefile
 sed -i -r "s/^GH_COMMIT=.*/GH_COMMIT=    $commit/" Makefile
+
+shasum="`sha256 /usr/ports/distfiles/$name-$date.tar.gz | cut -d' ' -f4`"
+size="`stat -f%z /usr/ports/distfiles/$name-$date.tar.gz`"
+distinfo="SHA256 ($name-$date.tar.gz) = $shasum
+SIZE ($name-$date.tar.gz) = $size"
+
+echo "$distinfo" > distinfo
+
 export FORCE_PKG_REGISTER=1
 make package
 echo "Package in `pwd`/`ls *.tbz`"
