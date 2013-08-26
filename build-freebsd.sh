@@ -17,9 +17,15 @@ git clone $gitrepo $name-$date
 cd $name-$date 
 if [[ $commit != ""  ]]; then
 	git checkout $commit
+else
+        commit="`git log | head -n1 | cut -d' ' -f2`"
 fi
+commit="`echo $commit | cut -c1-7`"
+
 tar czf /usr/ports/distfiles/cupscloudprint-$date.tar.gz ./
 cd packages/freebsd
+sed -i -r "s/^PORTVERSION=.*/PORTVERSION=    $date/" Makefile
+sed -i -r "s/^GH_COMMIT=.*/GH_COMMIT=    $commit/" Makefile
 export FORCE_PKG_REGISTER=1
 make package
 echo "Package in `pwd`/`ls *.tbz`"
