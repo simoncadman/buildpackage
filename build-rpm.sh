@@ -35,4 +35,5 @@ mkdir -p /root/rpmbuild/SOURCES
 mv $name-$date.tar.bz2 /root/rpmbuild/SOURCES/
 cd ..
 rpmbuild -ba SPECS/$name.spec --target $arch
+rpm --addsign /root/rpmbuild/RPMS/$name-$date-1.noarch.rpm
 echo "Files in /root/rpmbuild/RPMS , copy to /root/niftyreporpm/$arch/ , run upload and then upload to s3. "
