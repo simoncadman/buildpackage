@@ -19,5 +19,6 @@ if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
 cd packages/arch
+eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
 makepkg --sign
 echo "Files in `pwd` , upload `ls *.tar.xz` "
