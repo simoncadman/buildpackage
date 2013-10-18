@@ -19,5 +19,5 @@ if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
 cd packages/arch
-makepkg
+makepkg --sign
 echo "Files in `pwd` , upload `ls *.tar.xz` "
