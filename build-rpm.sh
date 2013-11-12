@@ -2,7 +2,7 @@
 set -e
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-rpm.sh name gitrepo [commit] [arch]"
-   exit
+   exit 1
 fi
 
 export name="$1"

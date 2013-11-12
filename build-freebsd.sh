@@ -2,7 +2,7 @@
 set -e
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-freebsd.sh name gitrepo [commit]"
-   exit
+   exit 1
 fi
 
 export name="$1"
