@@ -24,4 +24,4 @@ rm -rf /tmp/buildpackage/$name-$date/.git
 mkdir -p $start/out/
 #cat packages/gentoo/$name.ebuild > $start/$name-$date.ebuild
 sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild > $start/out/$name-$date.ebuild
-echo "Ebuild created as $start/$name-$date.ebuild"
+echo "Ebuild created as $start/out/$name-$date.ebuild"
