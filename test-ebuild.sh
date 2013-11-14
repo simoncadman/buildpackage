@@ -17,5 +17,5 @@ sudo mkdir -p $portdir/$category/$name
 sudo cp out/$name-$date.ebuild $portdir/$category/$name/$name-$date.ebuild
 cd $portdir/$category/$name
 sudo ebuild $name-$date.ebuild digest
-sudo emerge -v -1 =$category/$name-$date
+sudo emerge -q -1 =$category/$name-$date
 $testscript $@
