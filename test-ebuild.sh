@@ -13,9 +13,9 @@ export category="$2"
 export portdir="/usr/local/portage"
 export testscript="$3"
 
-sudo mkdir -p $portdir/$category/$name-test
-sudo cp out/$name-$date.ebuild $portdir/$category/$name-test/$name-test-$date.ebuild
-cd $portdir/$category/$name-test
-sudo ebuild $name-test-$date.ebuild digest
-sudo emerge -v -1 =$category/$name-test-$date
+sudo mkdir -p $portdir/$category/$name
+sudo cp out/$name-$date.ebuild $portdir/$category/$name/$name-$date.ebuild
+cd $portdir/$category/$name
+sudo ebuild $name-$date.ebuild digest
+sudo emerge -v -1 =$category/$name-$date
 $testscript $@
