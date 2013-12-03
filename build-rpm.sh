@@ -16,8 +16,8 @@ if [[ $5 != ""  ]]; then
 fi
 
 rm -rf /tmp/buildpackage/$name-$date
-mkdir -p /tmp/buildpackage/$name-$date/root/rpmbuild
-cd /tmp/buildpackage/$name-$date/root/rpmbuild
+mkdir -p /tmp/buildpackage/$name-$date/rpmbuild
+cd /tmp/buildpackage/$name-$date/rpmbuild
 mkdir {BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 cd SOURCES
 git clone $gitrepo $name-$date
@@ -25,14 +25,14 @@ cd $name-$date
 if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
-mv packages/redhat/SPECS/$name.spec /tmp/buildpackage/$name-$date/root/rpmbuild/SPECS/
+mv packages/redhat/SPECS/$name.spec /tmp/buildpackage/$name-$date/rpmbuild/SPECS/
 rm -rf .git packages
 cd ..
 tar cjf $name-$date.tar.bz2 $name-$date
 rm -rf $name-$date
-rm -rf /root/rpmbuild
-mkdir -p /root/rpmbuild/SOURCES
-mv $name-$date.tar.bz2 /root/rpmbuild/SOURCES/
+rm -rf $HOME/rpmbuild
+mkdir -p $HOME/rpmbuild/SOURCES
+mv $name-$date.tar.bz2 $HOME/rpmbuild/SOURCES/
 cd ..
 rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date"
-echo "Files in /root/rpmbuild/RPMS , copy to /root/niftyreporpm/$arch/ , run upload and then upload to s3. "
+echo "Files in $HOME/rpmbuild/RPMS , copy to /root/niftyreporpm/$arch/ , run upload and then upload to s3. "
