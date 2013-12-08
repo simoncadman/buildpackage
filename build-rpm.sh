@@ -40,5 +40,5 @@ mv $name-$date.tar.bz2 $HOME/rpmbuild/SOURCES/
 cd ..
 rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date"
 
-cp $HOME/rpmbuild/RPMS/*.rpm $start/out/
+cp $HOME/rpmbuild/$arch/RPMS/*.rpm $start/out/
 echo "Files in $HOME/rpmbuild/RPMS , copy to /root/niftyreporpm/$arch/ , run upload and then upload to s3. "
