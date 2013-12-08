@@ -5,6 +5,7 @@ if [[ $# -lt 2 ]]; then
    exit 1
 fi
 
+export start="`pwd`"
 export name="$1"
 export gitrepo="$2"
 export commit="$3"
@@ -14,6 +15,9 @@ export arch="noarch"
 if [[ $5 != ""  ]]; then
 	arch=$5
 fi
+
+rm -rf $start/out/
+mkdir -p $start/out/
 
 rm -rf /tmp/buildpackage/$name-$date
 mkdir -p /tmp/buildpackage/$name-$date/rpmbuild
@@ -35,4 +39,6 @@ mkdir -p $HOME/rpmbuild/SOURCES
 mv $name-$date.tar.bz2 $HOME/rpmbuild/SOURCES/
 cd ..
 rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date"
+
+cp $HOME/rpmbuild/RPMS/*.rpm $start/out/
 echo "Files in $HOME/rpmbuild/RPMS , copy to /root/niftyreporpm/$arch/ , run upload and then upload to s3. "
