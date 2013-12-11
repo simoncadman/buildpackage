@@ -31,7 +31,6 @@ echo "$name ($date-1) raring; urgency=low
  -- simon cadman <src@niftiestsoftware.com>  `date -R`
 " > debian/changelog
 cat debian/changelog.old >> debian/changelog
-cat debian/changelog
 unlink debian/changelog.old
 rm -rf packages
 debuild -S
