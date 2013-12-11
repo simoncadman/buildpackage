@@ -40,5 +40,5 @@ rm -rf packages
 debuild -S
 debuild -A
 
-cp ../$name\_$date-1_all.deb $start/out/
+cp ../$name\_$date-1_*.deb $start/out/
 echo "Files in /tmp/buildpackage/ , run dput changes file"
