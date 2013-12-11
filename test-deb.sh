@@ -20,5 +20,5 @@ export testscript="$3"
 cd /tmp/buildpackage/$name-$date
 debuild -A
 cd ..
-dpkg -i $name\_$date-1_all.deb
+dpkg -i $name\_$date-1_all.deb || ( apt-get install -f && dpkg -i $name\_$date-1_all.deb )
 $testscript $@
