@@ -5,10 +5,14 @@ if [[ $# -lt 2 ]]; then
    exit 1
 fi
 
+export start="`pwd`"
 export name="$1"
 export gitrepo="$2"
 export commit="$3"
 export date="`date +%Y%m%d`"
+
+rm -rf $start/out/
+mkdir -p $start/out/
 
 mkdir -p /tmp/buildpackage
 rm -rf /tmp/buildpackage/$name-$date
@@ -34,4 +38,7 @@ cat debian/changelog.old >> debian/changelog
 unlink debian/changelog.old
 rm -rf packages
 debuild -S
+debuild -A
+
+cp ../$name\_$date-1_all.deb $start/out/
 echo "Files in /tmp/buildpackage/ , run dput changes file"

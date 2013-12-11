@@ -17,8 +17,6 @@ export date="`date +%Y%m%d`"
 export category="$2"
 export testscript="$3"
 
-cd /tmp/buildpackage/$name-$date
-debuild -A
-cd ..
+cd /tmp/buildpackage/out/
 dpkg -i $name\_$date-1_all.deb || ( apt-get install -y -f && dpkg -i $name\_$date-1_all.deb )
 $testscript $@
