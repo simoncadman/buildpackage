@@ -28,6 +28,7 @@ eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
 if [[ "`whoami`" != 'root'  ]]; then
     makepkg --sign
 else
+    chown -R builduser:builduser /tmp/buildpackage/
     sudo -u builduser makepkg --sign
 fi
 
