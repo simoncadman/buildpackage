@@ -24,7 +24,12 @@ if [[ $commit != ""  ]]; then
 fi
 cd packages/arch
 eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
-makepkg --sign
+
+if [[ "`whoami`" != 'root'  ]]; then
+    makepkg --sign
+else
+    sudo -u builduser makepkg --sign
+fi
 
 cp *.pkg.tar.xz/ $start/out/
 echo "Files in `pwd` , upload `ls *.pkg.tar.xz` "
