@@ -32,7 +32,12 @@ echo "`date +%Y-%m-%d` Simon Cadman <src@niftiestsoftware.com>
 
 cat ChangeLog.old >> ChangeLog
 unlink ChangeLog.old
-          
+
+currentcommit="`git rev-parse HEAD`"
+
+sed -i "s/pkgver=.*/pkgver=$date/g" PKGBUILD
+sed -i "s/_gitversion=.*/_gitversion=\"$currentcommit\"/g" PKGBUILD
+
 eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
 
 if [[ "`whoami`" != 'root'  ]]; then
