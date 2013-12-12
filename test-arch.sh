@@ -17,5 +17,5 @@ export date="`date +%Y%m%d`"
 export category="$2"
 export testscript="$3"
 
-pacman -Syu /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
+pacman -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
 $testscript $@
