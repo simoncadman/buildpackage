@@ -26,10 +26,10 @@ cd packages/arch
 eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
 
 if [[ "`whoami`" != 'root'  ]]; then
-    makepkg --sign
+    makepkg --sign -s
 else
     chown -R builduser:builduser /tmp/buildpackage/
-    sudo -u builduser makepkg --sign
+    sudo -u builduser makepkg --sign -s
 fi
 
 cp *.pkg.tar.xz/ $start/out/
