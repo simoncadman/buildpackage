@@ -47,5 +47,5 @@ else
     sudo -u builduser makepkg --sign -s --noconfirm
 fi
 
-cp *.pkg.tar.xz $start/out/
+cp *.pkg.tar.xz* $start/out/
 echo "Files in `pwd` , upload `ls *.pkg.tar.xz` "
