@@ -42,12 +42,13 @@ sed -i "s/_gitversion=.*/_gitversion=\"$currentcommit\"/g" PKGBUILD
 
 if [[ "`whoami`" != 'root'  ]]; then
     makepkg --sign -s --noconfirm
+    gpg --verify *.pkg.tar.xz.sig
 else
     chown -R builduser:builduser /tmp/buildpackage/
     sudo -u builduser makepkg --sign -s --noconfirm
+    sudo -u builduser gpg --verify *.pkg.tar.xz.sig
 fi
 
-gpg --verify *.pkg.tar.xz.sig
 
 cp *.pkg.tar.xz* $start/out/
 echo "Files in `pwd` , upload `ls *.pkg.tar.xz` "
