@@ -49,7 +49,7 @@ else
     chown -R builduser:builduser /tmp/buildpackage/
     sudo -u builduser makepkg --sign -s --noconfirm
     sudo -u builduser gpg --verify *.pkg.tar.xz.sig
-    sudo -u gpg --detach-sign *.pkg.tar.xz
+    sudo -u builduser gpg --detach-sign *.pkg.tar.xz
     sudo -u builduser gpg --verify *.pkg.tar.xz.asc
 fi
 
