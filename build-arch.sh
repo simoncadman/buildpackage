@@ -38,7 +38,7 @@ currentcommit="`git rev-parse HEAD`"
 sed -i "s/pkgver=.*/pkgver=$date/g" PKGBUILD
 sed -i "s/_gitversion=.*/_gitversion=\"$currentcommit\"/g" PKGBUILD
 
-eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
+#eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
 
 if [[ "`whoami`" != 'root'  ]]; then
     makepkg --sign -s --noconfirm
