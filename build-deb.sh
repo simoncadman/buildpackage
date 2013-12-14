@@ -40,6 +40,5 @@ rm -rf packages
 debuild -S
 debuild -A
 
-debsig-verify ../$name\_$date-1_*.deb
 cp ../$name\_$date-1_*.deb $start/out/
 echo "Files in /tmp/buildpackage/ , run dput changes file"
