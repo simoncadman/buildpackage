@@ -39,6 +39,11 @@ unlink debian/changelog.old
 rm -rf packages
 debuild -S
 debuild -A
+dpkg-sig --sign builder ../$name\_$date-1_*.deb
+if [[ "`dpkg-sig --verify ../$name\_$date-1_*.deb | grep -c GOODSIG`" -lt 1 ]]; then
+    echo "Missing signature"
+    exit 1
+fi
 
 cp ../$name\_$date-1_*.deb $start/out/
 echo "Files in /tmp/buildpackage/ , run dput changes file"
