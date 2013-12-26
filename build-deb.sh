@@ -24,7 +24,6 @@ if [[ $commit != ""  ]]; then
 fi
 rm -rf /tmp/buildpackage/$name-$date/.git
 cd /tmp/buildpackage/
-tar cjf $name\_$date.orig.tar.bz2 $name-$date
 cd $name-$date
 mv packages/debian debian
 mv debian/changelog debian/changelog.old
@@ -37,6 +36,9 @@ echo "$name ($date-1) precise; urgency=low
 cat debian/changelog.old >> debian/changelog
 unlink debian/changelog.old
 rm -rf packages
+cd /tmp/buildpackage/
+tar cjf $name\_$date.orig.tar.bz2 $name-$date
+cd $name-$date
 debuild -S
 debuild -A
 dpkg-sig --sign builder ../$name\_$date-1_*.deb
