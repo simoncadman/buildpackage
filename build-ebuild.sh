@@ -9,6 +9,7 @@ export start="`pwd`"
 export name="$1"
 export gitrepo="$2"
 export commit="$3"
+export isbranch="$4"
 export date="`date +%Y%m%d`"
 
 rm -rf /tmp/buildpackage/$name-$date
@@ -23,6 +24,11 @@ fi
 rm -rf /tmp/buildpackage/$name-$date/.git
 rm -rf $start/out/
 mkdir -p $start/out/
-#cat packages/gentoo/$name.ebuild > $start/$name-$date.ebuild
-sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild > $start/out/$name-$date.ebuild
+
+if [[ $isbranch == "branch" ]]; then
+    sed  "s/EGIT_COMMIT=\".*\"/EGIT_BRANCH=\"$commit\"/g" /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild > $start/out/$name-$date.ebuild    
+else
+    sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild > $start/out/$name-$date.ebuild    
+fi
+
 echo "Ebuild created as $start/out/$name-$date.ebuild"
