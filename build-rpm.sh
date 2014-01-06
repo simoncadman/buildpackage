@@ -29,6 +29,7 @@ cd $name-$date
 if [[ $commit != ""  ]]; then
 	git checkout $commit
 fi
+yum-builddep -y packages/redhat/SPECS/$name.spec
 mv packages/redhat/SPECS/$name.spec /tmp/buildpackage/$name-$date/rpmbuild/SPECS/
 rm -rf .git packages
 cd ..
