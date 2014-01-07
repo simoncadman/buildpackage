@@ -41,7 +41,7 @@ mv $name-$date.tar.bz2 $HOME/rpmbuild/SOURCES/
 cd ..
 rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date"
 rpm -K $HOME/rpmbuild/RPMS/$arch/*.rpm
-rpmlint $HOME/rpmbuild/RPMS/$arch/*.rpm
+rpmlint $HOME/rpmbuild/RPMS/$arch/*.rpm || echo "rpmlint errored"
 
 cp $HOME/rpmbuild/RPMS/$arch/*.rpm $start/out/
 echo "Files in $HOME/rpmbuild/RPMS , copy to /root/niftyreporpm/$arch/ , run upload and then upload to s3. "
