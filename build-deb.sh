@@ -27,7 +27,7 @@ cd /tmp/buildpackage/
 cd $name-$date
 mv packages/debian debian
 
-if [[ `fgrep -c "$name ($date-1)"` -lt 1 ]]; then
+if [[ `fgrep -c "$name ($date-1)" debian/changelog` -lt 1 ]]; then
     # only add stub entry if one doesnt already exist
     mv debian/changelog debian/changelog.old
     echo "$name ($date-1) precise; urgency=low
