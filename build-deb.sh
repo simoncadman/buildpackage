@@ -43,7 +43,7 @@ fi
 rm -rf packages
 if [[ `fgrep -Ro "#! /usr/bin/env python2" *.py | wc -l` -gt 0 ]]; then
     echo "Compiling python packages"
-    python2 -m compileall -q -f .
+    python2 -m compileall .
 fi
 cd /tmp/buildpackage/
 tar cjf $name\_$date.orig.tar.bz2 $name-$date
