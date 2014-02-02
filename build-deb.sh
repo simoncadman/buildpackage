@@ -41,6 +41,10 @@ if [[ `fgrep -c "$name ($date-1)" debian/changelog` -lt 1 ]]; then
 fi
 
 rm -rf packages
+cd /tmp/buildpackage/$name-$date
+if [[ `fgrep -Ro "#! /usr/bin/env python2" *.py | wc -l` -gt 0 ]]; then
+    python2 -m compileall -q -f .
+fi
 cd /tmp/buildpackage/
 tar cjf $name\_$date.orig.tar.bz2 $name-$date
 cd $name-$date
