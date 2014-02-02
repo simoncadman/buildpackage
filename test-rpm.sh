@@ -21,6 +21,8 @@ export uninstalledtestscript="$4"
 yum install -y /$HOME/rpmbuild/RPMS/noarch/$name-$date-1.noarch.rpm
 $testscript $@
 if [[ $uninstalledtestscript != "" ]]; then
+    cp $uninstalledtestscript /tmp/test-remove
     yum remove $name
-    $uninstalledtestscript $@
+    /tmp/test-remove $@
+    unlink /tmp/test-remove
 fi

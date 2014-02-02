@@ -26,6 +26,8 @@ ebuild $name-$date.ebuild digest
 emerge -q -1 =$category/$name-$date
 $testscript $@
 if [[ $uninstalledtestscript != "" ]]; then
+    cp $uninstalledtestscript /tmp/test-remove
     emerge -C $category/$name
-    $uninstalledtestscript $@
+    /tmp/test-remove $@
+    unlink /tmp/test-remove
 fi

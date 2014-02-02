@@ -21,6 +21,8 @@ export uninstalledtestscript="$4"
 pacman --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
 $testscript $@
 if [[ $uninstalledtestscript != "" ]]; then
+    cp $uninstalledtestscript /tmp/test-remove
     pacman -R $name
-    $uninstalledtestscript $@
+    /tmp/test-remove $@
+    unlink /tmp/test-remove
 fi

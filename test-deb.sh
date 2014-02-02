@@ -22,6 +22,8 @@ cd /tmp/buildpackage/out/
 dpkg -i $name\_$date-1_all.deb || ( apt-get install -y -f && dpkg -i $name\_$date-1_all.deb )
 $testscript $@
 if [[ $uninstalledtestscript != "" ]]; then
+    cp $uninstalledtestscript /tmp/test-remove
     apt-get remove -y $name
-    $uninstalledtestscript $@
+    /tmp/test-remove $@
+    unlink /tmp/test-remove
 fi
