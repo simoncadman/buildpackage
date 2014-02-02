@@ -17,6 +17,7 @@ export date="`date +%Y%m%d`"
 export category="$2"
 export portdir="/usr/local/portage"
 export testscript="$3"
+export uninstalledtestscript="$4"
 
 mkdir -p $portdir/$category/$name
 cp out/$name-$date.ebuild $portdir/$category/$name/$name-$date.ebuild
@@ -24,3 +25,7 @@ cd $portdir/$category/$name
 ebuild $name-$date.ebuild digest
 emerge -q -1 =$category/$name-$date
 $testscript $@
+if [[ $uninstalledtestscript != "" ]]; then
+    emerge -C $category/$name
+    $uninstalledtestscript $@
+fi

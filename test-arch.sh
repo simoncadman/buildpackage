@@ -16,6 +16,11 @@ export name="$1"
 export date="`date +%Y%m%d`"
 export category="$2"
 export testscript="$3"
+export uninstalledtestscript="$4"
 
 pacman --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
 $testscript $@
+if [[ $uninstalledtestscript != "" ]]; then
+    pacman -R $name
+    $uninstalledtestscript $@
+fi

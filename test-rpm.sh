@@ -16,6 +16,11 @@ export name="$1"
 export date="`date +%Y%m%d`"
 export category="$2"
 export testscript="$3"
+export uninstalledtestscript="$4"
 
 yum install -y /$HOME/rpmbuild/RPMS/noarch/$name-$date-1.noarch.rpm
 $testscript $@
+if [[ $uninstalledtestscript != "" ]]; then
+    yum remove $name
+    $uninstalledtestscript $@
+fi
