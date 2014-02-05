@@ -48,8 +48,8 @@ fi
 cd /tmp/buildpackage/
 tar cjf $name\_$date.orig.tar.bz2 $name-$date
 cd $name-$date
-debuild -S -nc
-debuild -A -nc
+debuild -S
+debuild -A
 dpkg-sig --sign builder ../$name\_$date-1_*.deb
 if [[ "`dpkg-sig --verify ../$name\_$date-1_*.deb | grep -c GOODSIG`" -lt 1 ]]; then
     echo "Missing signature"
