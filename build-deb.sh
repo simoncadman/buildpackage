@@ -56,7 +56,6 @@ if [[ "`dpkg-sig --verify ../$name\_$date-1_*.deb | grep -c GOODSIG`" -lt 1 ]]; 
     exit 1
 fi
 
-cp ../$name\_$date-1.dsc $start/out/
 cp ../$name\_$date.orig.tar.bz2 $start/out/
-cp ../$name\_$date-1_* $start/out/
+cp ../$name\_$date-1* $start/out/
 echo "Files in /tmp/buildpackage/ , run dput changes file"
