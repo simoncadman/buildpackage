@@ -48,7 +48,7 @@ rm -rf $HOME/rpmbuild
 mkdir -p $HOME/rpmbuild/SOURCES
 mv $name-$date.tar.bz2 $HOME/rpmbuild/SOURCES/
 cd ..
-rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date-1"
+rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date"
 rpm -K $HOME/rpmbuild/RPMS/$arch/*.rpm
 rpmlint $HOME/rpmbuild/RPMS/$arch/*.rpm || echo "rpmlint errored"
 
