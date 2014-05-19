@@ -12,9 +12,9 @@ export gitrepo="$2"
 export commit="$3"
 export date="`date +%Y%m%d`"
 
-export tmp="/tmp/buildpackage"
-export srcdir="$tmp/$name-$date-src"
-export builddir="$tmp/$name-$date-build"
+export tmp="/tmp/buildpackage-$date"
+export srcdir="$tmp/$name-src"
+export builddir="$tmp/$name-build"
 
 sudo rm -rf "$srcdir" "$builddir"
 mkdir -p "$srcdir" "$builddir"
@@ -38,5 +38,5 @@ pkgbuild \
   --scripts "$srcdir/packages/darwin" \
   "$start/$name-$date.pkg"
 
-sudo rm -rf "$srcdir" "$builddir"
+sudo rm -rf "$tmp"
 
