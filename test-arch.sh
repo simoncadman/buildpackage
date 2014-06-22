@@ -18,11 +18,11 @@ export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
 
-pacman --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
+pacman --ignore filesystem --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
 $testscript $@
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
-    pacman -R --noconfirm $name
+    pacman --ignore filesystem -R --noconfirm $name
     /tmp/test-remove $@
     unlink /tmp/test-remove
 fi
