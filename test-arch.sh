@@ -22,7 +22,7 @@ pacman --ignore filesystem --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.
 $testscript $@
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
-    pacman --ignore filesystem -R --noconfirm $name
+    pacman -R --noconfirm $name
     /tmp/test-remove $@
     unlink /tmp/test-remove
 fi
