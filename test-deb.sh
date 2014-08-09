@@ -1,8 +1,8 @@
 #! /bin/bash
 
 set -e
-if [[ $# -lt 3 ]]; then
-   echo "USAGE: ./test-deb.sh name category packagetestscript [package options]"
+if [[ $# -lt 2 ]]; then
+   echo "USAGE: ./test-deb.sh name category [packagetestscript] [package options]"
    exit 1
 fi
 
@@ -20,7 +20,9 @@ export uninstalledtestscript="$4"
 
 cd /tmp/buildpackage/out/
 dpkg -i $name\_$date-1_all.deb || ( apt-get install -y -f && dpkg -i $name\_$date-1_all.deb )
-$testscript $@
+if [[ $testscript != "" ]]; then
+    $testscript $@
+fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
     apt-get remove -y $name

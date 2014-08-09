@@ -1,8 +1,8 @@
 #! /bin/bash
 
 set -e
-if [[ $# -lt 3 ]]; then
-   echo "USAGE: ./test-rpm.sh name category packagetestscript [package options]"
+if [[ $# -lt 2 ]]; then
+   echo "USAGE: ./test-rpm.sh name category [packagetestscript] [package options]"
    exit 1
 fi
 
@@ -19,7 +19,9 @@ export testscript="$3"
 export uninstalledtestscript="$4"
 
 yum install -y /$HOME/rpmbuild/RPMS/noarch/$name-$date-1.noarch.rpm
-$testscript $@
+if [[ $testscript != "" ]]; then
+    $testscript $@
+fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
     yum remove -y $name

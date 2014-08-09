@@ -1,8 +1,8 @@
 #! /bin/bash
 
 set -e
-if [[ $# -lt 3 ]]; then
-   echo "USAGE: ./test-ebuild.sh name category packagetestscript [package options]"
+if [[ $# -lt 2 ]]; then
+   echo "USAGE: ./test-ebuild.sh name category [packagetestscript] [package options]"
    exit 1
 fi
 
@@ -24,7 +24,9 @@ cp out/$name-$date.ebuild $portdir/$category/$name/$name-$date.ebuild
 cd $portdir/$category/$name
 ebuild $name-$date.ebuild digest
 emerge -q -1 =$category/$name-$date
-$testscript $@
+if [[ $testscript != "" ]]; then
+    $testscript $@
+fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
     emerge -C $category/$name
