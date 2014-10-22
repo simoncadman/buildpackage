@@ -18,6 +18,10 @@ export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
 
+if [[ $5 != "" ]]; then
+        date="$5"
+fi
+
 pacman --ignore filesystem --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
 if [[ $testscript != "" ]]; then
     $testscript $@
