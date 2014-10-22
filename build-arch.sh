@@ -11,6 +11,10 @@ export gitrepo="$2"
 export commit="$3"
 export date="`date +%Y%m%d`"
 
+if [[ $4 != "" ]]; then
+	date="$4"
+fi
+
 rm -rf $start/out/
 mkdir -p $start/out/
 
