@@ -47,6 +47,7 @@ if [[ `fgrep -Ro "#! /usr/bin/env python2" *.py | wc -l` -gt 0 ]]; then
 fi
 cd /tmp/buildpackage/
 tar cjf $name\_$date.orig.tar.bz2 $name-$date
+mk-build-deps -i $name-$date-1.dsc -t "apt-get --no-install-recommends -y"
 cd $name-$date
 debuild -S
 debuild -A
