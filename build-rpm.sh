@@ -49,6 +49,12 @@ mkdir -p $HOME/rpmbuild/SOURCES
 mv $name-$date.tar.bz2 $HOME/rpmbuild/SOURCES/
 cd ..
 rpmbuild -ba --sign SPECS/$name.spec --target $arch -D "_version $date"
+
+# import signing key to rpm
+gpg --export --armor > ~/.build-package-temp-pub-key
+rpm --import ~/.build-package-temp-pub-key
+unlink ~/.build-package-temp-pub-key
+
 rpm -K $HOME/rpmbuild/RPMS/$arch/*.rpm
 rpmlint $HOME/rpmbuild/RPMS/$arch/*.rpm || echo "rpmlint errored"
 
