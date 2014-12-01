@@ -1,5 +1,7 @@
 #! /bin/bash
 set -e
+set -v
+
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-arch.sh name gitrepo [commit]"
    exit 1
