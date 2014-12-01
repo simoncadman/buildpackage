@@ -1,6 +1,5 @@
 #! /bin/bash
 set -e
-set -v
 
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-arch.sh name gitrepo [commit]"
@@ -52,13 +51,13 @@ sed -i "s/_gitversion=.*/_gitversion=\"$currentcommit\"/g" PKGBUILD
 if [[ "`whoami`" != 'root'  ]]; then
     makepkg --sign -s --noconfirm
     gpg --verify *.pkg.tar.xz.sig
-    gpg -a --detach-sign *.pkg.tar.xz
+    gpg -a --batch --detach-sign *.pkg.tar.xz
     gpg --verify *.pkg.tar.xz.asc
 else
     chown -R builduser:builduser /tmp/buildpackage/
     sudo -u builduser makepkg --sign -s --noconfirm
     sudo -u builduser gpg --verify *.pkg.tar.xz.sig
-    sudo -u builduser gpg -a --detach-sign *.pkg.tar.xz
+    sudo -u builduser gpg -a --batch --detach-sign *.pkg.tar.xz
     sudo -u builduser gpg --verify *.pkg.tar.xz.asc
 fi
 
