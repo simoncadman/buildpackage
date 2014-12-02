@@ -51,13 +51,13 @@ sed -i "s/_gitversion=.*/_gitversion=\"$currentcommit\"/g" PKGBUILD
 if [[ "`whoami`" != 'root'  ]]; then
     makepkg --sign -s --noconfirm
     gpg --verify *.pkg.tar.xz.sig
-    gpg -a --batch --detach-sign *.pkg.tar.xz
+    gpg -o "$name-$date-1-any.pkg.tar.xz.asc" --enarmor *.pkg.tar.xz.sig
     gpg --verify *.pkg.tar.xz.asc
 else
     chown -R builduser:builduser /tmp/buildpackage/
     sudo -u builduser makepkg --sign -s --noconfirm
     sudo -u builduser gpg --verify *.pkg.tar.xz.sig
-    sudo -u builduser gpg -a --batch --detach-sign *.pkg.tar.xz
+    sudo -u builduser gpg -o "$name-$date-1-any.pkg.tar.xz.asc" --enarmor *.pkg.tar.xz.sig
     sudo -u builduser gpg --verify *.pkg.tar.xz.asc
 fi
 
