@@ -6,10 +6,14 @@ if [[ $# -lt 3 ]]; then
 fi
 
 export name="$1"
-export section="$2"
-export gitrepo="$3"
-export commit="$4"
+export gitrepo="$2"
+export commit="$3"
 export date="`date +%Y%m%d`"
+
+if [[ $4 != "" ]]; then
+    date="$4"
+fi
+export section="$5"
 
 rm -rf /tmp/buildpackage/$name-$date
 mkdir -p /tmp/buildpackage/$name-$date/
