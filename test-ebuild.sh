@@ -18,6 +18,9 @@ export category="$2"
 export portdir="/usr/local/portage"
 export testscript="$3"
 export uninstalledtestscript="$4"
+if [[ $6 != "" ]]; then
+        date="$6"
+fi
 
 mkdir -p $portdir/$category/$name
 cp out/$name-$date.ebuild $portdir/$category/$name/$name-$date.ebuild
