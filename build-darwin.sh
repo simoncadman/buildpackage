@@ -29,7 +29,7 @@ if [[ $commit != "" ]]; then
   git checkout $commit
 fi
 
-cupsgroup="_lp" ./configure
+cupsgroup="_lp" ./configure --prefix=/usr
 sudo make install DESTDIR="$builddir"
 
 cd "$start"
