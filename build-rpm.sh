@@ -13,6 +13,7 @@ export date="`date +%Y%m%d`"
 export arch="noarch"
 
 set -e
+set -v
 
 if [[ $3 != ""  ]]; then
 	arch=$3
