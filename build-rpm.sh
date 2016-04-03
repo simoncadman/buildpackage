@@ -29,6 +29,8 @@ mkdir {BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 cd SOURCES
 rsync -av "$workspace/" $name-$date/
 cd $name-$date 
+pwd
+ls -al
 
 if [[ `fgrep -c "($date-1)" packages/redhat/SPECS/$name.spec` -lt 1 ]]; then
     # only add stub entry if one doesnt already exist
