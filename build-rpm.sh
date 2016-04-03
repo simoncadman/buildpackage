@@ -27,7 +27,7 @@ mkdir -p /tmp/buildpackage/$name-$date/rpmbuild
 cd /tmp/buildpackage/$name-$date/rpmbuild
 mkdir {BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 cd SOURCES
-mv "$workspace" $name-$date
+rsync -av "$workspace/" $name-$date/
 cd $name-$date 
 
 if [[ `fgrep -c "($date-1)" packages/redhat/SPECS/$name.spec` -lt 1 ]]; then
