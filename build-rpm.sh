@@ -42,7 +42,7 @@ fi
 
 yum-builddep -y packages/redhat/SPECS/$name.spec
 mv packages/redhat/SPECS/$name.spec /tmp/buildpackage/$name-$date/rpmbuild/SPECS/
-rm -rf .git packages
+rm -rf .git packages .coveragerc
 cd ..
 tar cjf $name-$date.tar.bz2 $name-$date
 rm -rf $name-$date
