@@ -21,8 +21,9 @@ PACKAGEMANAGER="yum"
 
 if which dnf > /dev/null 2>&1; then
 	PACKAGEMANAGER="dnf"
-	echo "Using dnf for package manager"
 fi
+
+echo "Using $PACKAGEMANAGER for package manager"
 
 $PACKAGEMANAGER install -y /$HOME/rpmbuild/RPMS/noarch/$name-*-1.noarch.rpm
 if [[ $testscript != "" ]]; then
