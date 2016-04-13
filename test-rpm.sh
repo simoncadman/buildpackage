@@ -17,13 +17,20 @@ export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
 
-yum install -y /$HOME/rpmbuild/RPMS/noarch/$name-*-1.noarch.rpm
+PACKAGEMANAGER="yum"
+
+if which dnf > /dev/null 2>&1; then
+	PACKAGEMANAGER="dnf"
+	echo "Using dnf for package manager"
+fi
+
+$PACKAGEMANAGER install -y /$HOME/rpmbuild/RPMS/noarch/$name-*-1.noarch.rpm
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
-    yum remove -y $name
+    $PACKAGEMANAGER remove -y $name
     /tmp/test-remove $@
     unlink /tmp/test-remove
 fi
