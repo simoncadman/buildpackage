@@ -19,7 +19,7 @@ export uninstalledtestscript="$4"
 
 PACKAGEMANAGER="yum"
 
-if which dnf; then
+if which dnf > /dev/null 2>&1; then
 	PACKAGEMANAGER="dnf"
 fi
 
