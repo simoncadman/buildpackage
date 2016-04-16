@@ -1,5 +1,8 @@
 #! /bin/bash
 set -e
+set -u
+set -v
+
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-deb.sh name workspace"
    exit 1
@@ -9,6 +12,9 @@ export start="`pwd`"
 export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
+
+echo $workspace
+ls -al ~/
 
 mv $workspace ~/$name-$date/
 cd ~/$name-date
