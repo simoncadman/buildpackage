@@ -24,13 +24,13 @@ fi
 
 emerge --search $name
 
-emerge -q -1 =$category/$name-$date::local
+emerge -q -1 =$category/$name-$date::Local
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
-    emerge -C $category/$name::local
+    emerge -C $category/$name::Local
     /tmp/test-remove $@
     unlink /tmp/test-remove
 fi
