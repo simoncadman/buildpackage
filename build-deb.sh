@@ -13,10 +13,9 @@ export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
 
-temppath="~/$name-$date"
-echo $temppath
+temppath="$HOME/$name-$date"
 mv "$workspace" "$temppath"
-cd ~/$name-$date
+cd $temppath
 mv packages/debian debian
 
 if [[ `fgrep -c "$name ($date-1)" debian/changelog` -lt 1 ]]; then
