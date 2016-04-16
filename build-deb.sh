@@ -13,8 +13,8 @@ export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
 
-mv "$workspace" "/home/cloud-user/$name-$date"
-cd ~/$name-date
+mv "$workspace" "~/$name-$date"
+cd ~/$name-$date
 mv packages/debian debian
 
 if [[ `fgrep -c "$name ($date-1)" debian/changelog` -lt 1 ]]; then
