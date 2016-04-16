@@ -12,7 +12,8 @@ export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
 
-ls -al $WORKSPACE
+echo $WORKSPACE
+ls -al "$WORKSPACE"
 commit="`cat $WORKSPACE/.git/refs/heads/master`"
 rm -rf /$WORKSPACE/.git
 rm -rf $start/ebuilds/
