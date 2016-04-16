@@ -13,6 +13,9 @@ export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
 
+rm -rf $start/out/
+mkdir -p $start/out/
+
 temppath="$HOME/$name-$date"
 mv "$workspace" "$temppath"
 cd $temppath
