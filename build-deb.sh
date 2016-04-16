@@ -13,8 +13,9 @@ export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
 
-echo ~/
-mv "$workspace" "~/$name-$date"
+temppath="~/$name-$date"
+echo $temppath
+mv "$workspace" "$temppath"
 cd ~/$name-$date
 mv packages/debian debian
 
