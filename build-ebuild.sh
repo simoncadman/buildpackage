@@ -23,7 +23,7 @@ mkdir -p $start/ebuilds/
 sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" "$WORKSPACE/packages/gentoo/$name.ebuild" > "$start/ebuilds/$name-$date.ebuild"
 mkdir -p /usr/local/portage/$category/$name/
 echo 'masters = gentoo' > /usr/local/portage/layout.conf
-cp "$start/ebuilds/$name-$date.ebuild" /usr/local/portage/$category/$name/
+mv "$start/ebuilds/$name-$date.ebuild" /usr/local/portage/$category/$name/
 cd /usr/local/portage/
 ebuild $category/$name/$name-$date.ebuild digest
 mkdir -p $start/ebuilds/$category/$name
