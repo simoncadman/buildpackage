@@ -22,10 +22,6 @@ if [[ $6 != "" ]]; then
         date="$6"
 fi
 
-mkdir -p $portdir/$category/$name
-cp out/$name-$date.ebuild $portdir/$category/$name/$name-$date.ebuild
-cd $portdir/$category/$name
-ebuild $name-$date.ebuild digest
 emerge -q -1 =$category/$name-$date
 if [[ $testscript != "" ]]; then
     $testscript $@
