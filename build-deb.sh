@@ -1,34 +1,17 @@
 #! /bin/bash
 set -e
 if [[ $# -lt 2 ]]; then
-   echo "USAGE: ./build-deb.sh name gitrepo [commit]"
+   echo "USAGE: ./build-deb.sh name workspace"
    exit 1
 fi
 
 export start="`pwd`"
 export name="$1"
-export gitrepo="$2"
-export commit="$3"
+export workspace="$2"
 export date="`date +%Y%m%d`"
 
-if [[ $4 != "" ]]; then
-    date="$4"
-fi
-
-rm -rf $start/out/
-mkdir -p $start/out/
-
-mkdir -p /tmp/buildpackage
-rm -rf /tmp/buildpackage/$name-$date
-mkdir -p /tmp/buildpackage/$name-$date
-cd /tmp/buildpackage/$name-$date
-git clone $gitrepo . 
-if [[ $commit != ""  ]]; then
-	git checkout $commit
-fi
-rm -rf /tmp/buildpackage/$name-$date/.git
-cd /tmp/buildpackage/
-cd $name-$date
+mv $workspace ~/$name-$date
+cd ~/$name-date
 mv packages/debian debian
 
 if [[ `fgrep -c "$name ($date-1)" debian/changelog` -lt 1 ]]; then
@@ -49,7 +32,7 @@ if [[ `fgrep -Ro "#! /usr/bin/env python2" *.py | wc -l` -gt 0 ]]; then
     echo "Compiling python packages"
     python2 -m compileall .
 fi
-cd /tmp/buildpackage/
+cd ..
 tar cjf $name\_$date.orig.tar.bz2 $name-$date
 cd $name-$date
 debuild -S
@@ -63,4 +46,4 @@ fi
 
 cp ../$name\_$date.orig.tar.bz2 $start/out/
 cp ../$name\_$date-1* $start/out/
-echo "Files in /tmp/buildpackage/ , run dput changes file"
+echo "Files in $start/out/ , run dput changes file"
