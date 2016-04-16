@@ -19,7 +19,7 @@ rm -rf "$WORKSPACE/.git"
 rm -rf $start/ebuilds/
 mkdir -p $start/ebuilds/
 
-sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" /tmp/buildpackage/$name-$date/packages/gentoo/$name.ebuild > $start/ebuilds/$name-$date.ebuild
+sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" "$start/packages/gentoo/$name.ebuild" > "$start/ebuilds/$name-$date.ebuild"
 ebuild $start/ebuilds/$name-$date.ebuild  digest
 
 echo "Ebuild created as $start/ebuilds/$name-$date.ebuild"
