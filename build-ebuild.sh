@@ -1,6 +1,6 @@
 #! /bin/bash
 set -e
-set -v
+set -u
 
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-ebuild.sh name workspace"
@@ -12,10 +12,10 @@ export name="$1"
 export WORKSPACE="$2"
 export date="`date +%Y%m%d`"
 
-echo $WORKSPACE
-ls -al "$WORKSPACE"
-commit="`cat $WORKSPACE/.git/refs/heads/master`"
-rm -rf /$WORKSPACE/.git
+cd "$WORKSPACE"
+commit="`git rev-parse HEAD`"
+cd "$start"
+rm -rf "$WORKSPACE/.git"
 rm -rf $start/ebuilds/
 mkdir -p $start/ebuilds/
 
