@@ -24,8 +24,9 @@ sed  "s/EGIT_COMMIT=\".*\"/EGIT_COMMIT=\"$commit\"/g" "$WORKSPACE/packages/gento
 mkdir -p /usr/local/portage/$category/$name/
 echo 'masters = gentoo' > /usr/local/portage/layout.conf
 cp "$start/ebuilds/$name-$date.ebuild" /usr/local/portage/$category/$name/
-ebuild /usr/local/portage/$category/$name/$name-$date.ebuild digest
+cd /usr/local/portage/
+ebuild $category/$name/$name-$date.ebuild digest
 mkdir -p $start/ebuilds/$category/$name
-cp usr/local/portage/$category/$name/* $start/ebuilds/$category/$name
+cp /usr/local/portage/$category/$name/* $start/ebuilds/$category/$name
 
 echo "Ebuild created in $start/ebuilds/"
