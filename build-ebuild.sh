@@ -1,5 +1,7 @@
 #! /bin/bash
 set -e
+set -v
+
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-ebuild.sh name workspace"
    exit 1
@@ -13,6 +15,7 @@ export date="`date +%Y%m%d`"
 rm -rf /tmp/buildpackage/$name-$date
 mkdir -p /tmp/buildpackage/$name-$date
 cd /tmp/buildpackage/$name-$date
+ls -al $WORKSPACE
 commit="`cat $WORKSPACE/.git/refs/heads/master`"
 rm -rf /$WORKSPACE/.git
 rm -rf $start/ebuilds/
