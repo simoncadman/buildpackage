@@ -22,6 +22,8 @@ if [[ $6 != "" ]]; then
         date="$6"
 fi
 
+emerge --search $name
+
 emerge -q -1 =$category/$name-$date::local
 if [[ $testscript != "" ]]; then
     $testscript $@
