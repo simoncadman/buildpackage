@@ -12,9 +12,6 @@ export name="$1"
 export workspace="$2"
 export date="`date +%Y%m%d`"
 
-rm -rf /tmp/buildpackage/$name-$date
-mkdir -p /tmp/buildpackage/$name-$date
-cd /tmp/buildpackage/$name-$date
 ls -al $WORKSPACE
 commit="`cat $WORKSPACE/.git/refs/heads/master`"
 rm -rf /$WORKSPACE/.git
