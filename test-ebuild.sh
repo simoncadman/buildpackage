@@ -22,13 +22,13 @@ if [[ $6 != "" ]]; then
         date="$6"
 fi
 
-emerge -q -1 =$category/$name-$date
+emerge -q -1 =$category/$name-$date::local
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
-    emerge -C $category/$name
+    emerge -C $category/$name::local
     /tmp/test-remove $@
     unlink /tmp/test-remove
 fi
