@@ -9,7 +9,7 @@ fi
 
 export start="`pwd`"
 export name="$1"
-export workspace="$2"
+export WORKSPACE="$2"
 export date="`date +%Y%m%d`"
 
 echo $WORKSPACE
