@@ -46,6 +46,8 @@ if [[ "`whoami`" != 'root'  ]]; then
     gpg --verify *.pkg.tar.xz.asc
 else
     echo "Running as builduser"
+    mv "$workspace" "/home/builduser/workspace"
+    cd "/home/builduser/workspace/packages/arch"
     chown -R builduser:builduser ./
     sudo -u builduser makepkg --sign -s --noconfirm
     sudo -u builduser gpg --verify *.pkg.tar.xz.sig
