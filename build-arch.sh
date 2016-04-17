@@ -1,6 +1,7 @@
 #! /bin/bash
 set -e
 set -u
+set -v
 
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-arch.sh name workspace"
