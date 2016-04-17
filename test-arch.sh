@@ -22,7 +22,7 @@ if [[ $6 != "" ]]; then
         date="$6"
 fi
 
-pacman --ignore filesystem --noconfirm -U /tmp/buildpackage/out/$name-$date-1-*.pkg.tar.xz
+pacman --ignore filesystem --noconfirm -U $name-$date-1-*.pkg.tar.xz
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
