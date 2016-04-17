@@ -17,7 +17,7 @@ export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
 
-dpkg -i $name\_*-1_all.deb || ( apt-get install --install-suggests  -y -f && dpkg -i $name\_*-1_all.deb )
+dpkg -i $name\_*-1_all.deb || ( apt-get install -y -f && dpkg -i $name\_*-1_all.deb )
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
