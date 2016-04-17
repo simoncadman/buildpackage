@@ -1,5 +1,6 @@
 #! /bin/bash
 set -e
+set -u
 
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./build-arch.sh name workspace"
@@ -41,7 +42,7 @@ if [[ "`whoami`" != 'root'  ]]; then
     gpg -o "$name-$date-1-any.pkg.tar.xz.asc" --enarmor *.pkg.tar.xz.sig
     gpg --verify *.pkg.tar.xz.asc
 else
-    chown -R builduser:builduser /tmp/buildpackage/
+    chown -R builduser:builduser ./
     sudo -u builduser makepkg --sign -s --noconfirm
     sudo -u builduser gpg --verify *.pkg.tar.xz.sig
     sudo -u builduser gpg -o "$name-$date-1-any.pkg.tar.xz.asc" --enarmor *.pkg.tar.xz.sig
