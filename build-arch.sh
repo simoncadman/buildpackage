@@ -39,11 +39,13 @@ sed -i "s/_gitversion=.*/_gitversion=\"$currentcommit\"/g" PKGBUILD
 #eval `gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses`
 
 if [[ "`whoami`" != 'root'  ]]; then
+    echo "Running as `whoami`"
     makepkg --sign -s --noconfirm
     gpg --verify *.pkg.tar.xz.sig
     gpg -o "$name-$date-1-any.pkg.tar.xz.asc" --enarmor *.pkg.tar.xz.sig
     gpg --verify *.pkg.tar.xz.asc
 else
+    echo "Running as builduser"
     chown -R builduser:builduser ./
     sudo -u builduser makepkg --sign -s --noconfirm
     sudo -u builduser gpg --verify *.pkg.tar.xz.sig
