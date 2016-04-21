@@ -22,6 +22,7 @@ cupsgroup="_lp" ./configure --prefix=/usr
 sudo make install DESTDIR="$builddir"
 
 cd "$start"
+mkdir out
 
 pkgbuild \
   --root "$builddir" \
@@ -29,7 +30,7 @@ pkgbuild \
   --ownership preserve \
   --version "$date" \
   --scripts "$workspace/packages/darwin" \
-  "$start/$name-$date.pkg"
+  "$start/out/$name-$date.pkg"
 
 sudo rm -rf "$tmp"
 
