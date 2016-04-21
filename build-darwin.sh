@@ -6,6 +6,8 @@ if [[ $# -lt 2 ]]; then
   exit 1
 fi
 
+set -u
+
 export start=$PWD
 export name="$1"
 export workspace="$2"
@@ -14,7 +16,7 @@ export date="`date +%Y%m%d`"
 export tmp="/tmp/buildpackage-$date"
 export builddir="$tmp/$name-build"
 
-cd $workspace
+cd "$workspace"
 
 cupsgroup="_lp" ./configure --prefix=/usr
 sudo make install DESTDIR="$builddir"
