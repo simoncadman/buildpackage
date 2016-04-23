@@ -17,6 +17,8 @@ export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
 
+trap 'cat /var/log/install.log' exit
+
 installer -dumplog -verbose -pkg cupscloudprint-*.pkg -target /
 if [[ $testscript != "" ]]; then
     $testscript $@
