@@ -17,7 +17,7 @@ export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
 
-installer -pkg cupscloudprint-*.pkg -target /
+installer -dumplog -verbose -pkg cupscloudprint-*.pkg -target /
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
