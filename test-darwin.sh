@@ -43,7 +43,7 @@ if [[ $uninstalledtestscript != "" ]]; then
     echo "$DIRS"
     while read -r dir; do
         echo "deleting /$dir"
-        rmdir "/$dir"
+        rmdir "/$dir" || echo "Warning: Failed to delete dir"
     done <<< "$DIRS"
 
     pkgutil --forget "$packagename"
