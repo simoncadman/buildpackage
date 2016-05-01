@@ -1,7 +1,6 @@
 #! /bin/bash
 
 set -e
-set -v
 
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./test-darwin.sh name category [packagetestscript] [package options]"
@@ -28,6 +27,7 @@ fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
     cd "$start"
+    pkgutil --pkgs
     pkgutil --forget --unlink cupscloudprint-*.pkg
     /tmp/test-remove $@
     unlink /tmp/test-remove
