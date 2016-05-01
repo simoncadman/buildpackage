@@ -34,16 +34,16 @@ if [[ $uninstalledtestscript != "" ]]; then
     echo "Files:"
     echo "$FILES"
     while read -r file; do
-        echo "deleting $file"
-	unlink "$file"
+        echo "deleting /$file"
+	unlink "/$file"
     done <<< "$FILES"
 
     DIRS="`pkgutil --only-dirs --files $packagename`"
     echo "Dirs:"
     echo "$DIRS"
     while read -r dir; do
-        echo "deleting $dir"
-        rmdir "$dir"
+        echo "deleting /$dir"
+        rmdir "/$dir"
     done <<< "$DIRS"
 
     pkgutil --forget "$packagename"
