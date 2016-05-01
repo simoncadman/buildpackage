@@ -30,21 +30,21 @@ if [[ $uninstalledtestscript != "" ]]; then
     cd "$start"
     pkgutil --pkgs
     echo "Removing $packagename"
-    FILES="pkgutil --files --only-files"
+    FILES="`pkgutil --files --only-files`"
     echo "Files:"
     echo "$FILES"
     while read -r file; do
         echo "deleting $file"
 	unlink "$file"
-    done <<< "$files"
+    done <<< "$FILES"
 
-    DIRS="pkgutil --files --only-dirs"
+    DIRS="`pkgutil --files --only-dirs`"
     echo "Dirs:"
     echo "$DIRS"
     while read -r dir; do
         echo "deleting $dir"
         rmdir "$dir"
-    done <<< "$dirs"
+    done <<< "$DIRS"
 
     pkgutil --forget "$packagename"
     /tmp/test-remove $@
