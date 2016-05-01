@@ -29,7 +29,8 @@ if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
     cd "$start"
     pkgutil --pkgs
-    pkgutil --forget --unlink $packagename
+    echo "Removing $packagename"
+    pkgutil --forget --unlink "$packagename"
     /tmp/test-remove $@
     unlink /tmp/test-remove
     pkgutil --pkgs
