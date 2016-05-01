@@ -25,6 +25,7 @@ if [[ $testscript != "" ]]; then
 fi
 if [[ $uninstalledtestscript != "" ]]; then
     cp $uninstalledtestscript /tmp/test-remove
+    cd "$start"
     pkgutil --forget --unlink cupscloudprint-*.pkg
     /tmp/test-remove $@
     unlink /tmp/test-remove
