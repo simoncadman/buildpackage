@@ -17,7 +17,7 @@ export name="$1"
 export category="$2"
 export testscript="$3"
 export uninstalledtestscript="$4"
-export packagename="$5"
+export packagename="$6"
 
 trap 'echo exiting; tail -n100 /var/log/install.log' exit
 
