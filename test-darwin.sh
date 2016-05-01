@@ -1,6 +1,8 @@
 #! /bin/bash
 
 set -e
+set -v
+
 if [[ $# -lt 2 ]]; then
    echo "USAGE: ./test-darwin.sh name category [packagetestscript] [package options]"
    exit 1
