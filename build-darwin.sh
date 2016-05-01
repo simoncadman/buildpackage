@@ -20,6 +20,7 @@ cd "$workspace"
 
 cupsgroup="_lp" ./configure --prefix=/usr
 sudo make install DESTDIR="$builddir"
+sudo python -m compileall "$builddir"
 
 cd "$start"
 mkdir out
