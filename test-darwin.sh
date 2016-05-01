@@ -38,7 +38,7 @@ if [[ $uninstalledtestscript != "" ]]; then
 	unlink "/$file"
     done <<< "$FILES"
 
-    DIRS="`pkgutil --only-dirs --files $packagename`"
+    DIRS="`pkgutil --only-dirs --files $packagename | awk '{ print length($0) " " $0; }' | sort -r -n | cut -d ' ' -f 2-`"
     echo "Dirs:"
     echo "$DIRS"
     while read -r dir; do
