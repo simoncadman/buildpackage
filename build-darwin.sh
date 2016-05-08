@@ -18,7 +18,7 @@ export builddir="$tmp/$name-build"
 
 cd "$workspace"
 
-cupsgroup="_lp" ./configure --prefix=/usr
+cupsgroup="_lp" ./configure --prefix=/usr/local
 sudo make install DESTDIR="$builddir"
 sudo python -m compileall "$builddir"
 
