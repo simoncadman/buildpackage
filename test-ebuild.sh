@@ -24,7 +24,7 @@ fi
 
 emerge --search $name
 
-emerge -q -1 =$category/$name-$date::Local
+emerge -1 =$category/$name-$date::Local
 if [[ $testscript != "" ]]; then
     $testscript $@
 fi
